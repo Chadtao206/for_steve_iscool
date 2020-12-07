@@ -5,17 +5,22 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.get("/fun/:param1?/:param2/:param3?", ({ params }, res) => {
+    console.log(params);
+    res.json("you hit this route!")
+})
 
-app.get("/sayhi/:myname", (req, res) => res.json(`HELLO ${req.params.myname}`));
-app.post("/login", ({ username, password }, res) => {
-    console.log(username, password)
-    if (username === "steve" && password === "iscool") {
-        res.json("HELLO WELCOME!").end();
-    }
-    res.json("NEW PHONE WHO DIS")
-});
+const apiRoutes = require('./routes/api');
+app.use(apiRoutes);
 
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
+// app.get("*", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
 
 
 app.listen(PORT, () => console.log("HI STEVE!"));
+
+
+//1- git init
+//2- git add . git commit ...
+//3- heroku create (optional - give a name)
+//4- git push heroku master/main/w/e
+//debug - heroku logs or heroku logs --tail for livestream of logs
