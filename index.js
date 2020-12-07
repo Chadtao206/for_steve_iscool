@@ -8,6 +8,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/sayhi/:myname", (req, res) => res.json(`HELLO ${req.params.myname}`));
 app.post("/login", ({ username, password }, res) => {
+    console.log(username, password)
     if (username === "steve" && password === "iscool") {
         res.json("HELLO WELCOME!").end();
     }
